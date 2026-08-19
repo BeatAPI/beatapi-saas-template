@@ -1,0 +1,58 @@
+// Cloudflare Workers deploy config — TEMPLATE.
+// Copy this to wrangler.jsonc (gitignored, your working copy) and fill in real
+// production bindings / routes before deploying.
+// `pnpm cf:build` (NITRO_PRESET=cloudflare_module) merges wrangler.jsonc into
+// the generated .output/server/wrangler.json; deploy with `pnpm cf:deploy`.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "beatapi-saas-template",
+  "compatibility_date": "2026-06-23",
+  "compatibility_flags": ["nodejs_compat"],
+  // For production, route both apex and www. The Worker redirects www.* to
+  // https://apex in src/server.ts.
+  // "routes": [
+  //   { "pattern": "your-domain.com", "custom_domain": true },
+  //   { "pattern": "www.your-domain.com", "custom_domain": true }
+  // ],
+  "observability": {
+    "enabled": true
+  },
+  "triggers": {
+    "crons": ["*/2 * * * *"]
+  },
+  "vars": {
+    "DATABASE_PROVIDER": "postgresql",
+    "VITE_APP_URL": "https://your-domain.com",
+    "VITE_BASE_URL": "https://your-domain.com",
+    "AUTH_URL": "https://your-domain.com",
+    "BETTER_AUTH_URL": "https://your-domain.com",
+    "VITE_APP_NAME": "BeatAPI",
+    "VITE_GOOGLE_AUTH_ENABLED": "false",
+    "VITE_GOOGLE_ONE_TAP_ENABLED": "false",
+    "VITE_CRISP_ENABLED": "false",
+    "VITE_TURNSTILE_ENABLED": "false",
+    "EVOLINK_API_BASE_URL": "https://api.evolink.ai/v1",
+    "ALIBABA_DASHSCOPE_API_BASE_URL": "https://dashscope-intl.aliyuncs.com/api/v1",
+    "ALIBABA_WAN_T2V_MODEL": "wan2.7-t2v",
+    "ALIBABA_WAN_I2V_MODEL": "wan2.7-i2v",
+    "ALIBABA_WAN_VIDEOEDIT_MODEL": "wan2.7-videoedit",
+    "EFFECTS_GENERATION_TIMEOUT_MS": "1800000",
+    "EFFECTS_POLL_INTERVAL_MS": "20000",
+    "KIE_CALLBACK_URL": "https://your-domain.com/api/effects/callback",
+    "VIDU_CALLBACK_URL": "https://your-domain.com/api/effects/callback"
+  },
+  // Production Postgres options:
+  //
+  // Preferred Cloudflare path: Hyperdrive binding created from the direct
+  // Postgres URL, not the pooler URL:
+  // npx wrangler hyperdrive create beatapi-saas-template-db --connection-string="postgres://..."
+  // "hyperdrive": [
+  //   { "binding": "HYPERDRIVE", "id": "REPLACE_WITH_HYPERDRIVE_ID" }
+  // ]
+  //
+  // Direct connection fallback: set DATABASE_URL as a Worker secret.
+  // Secrets must be set with `wrangler secret put`, not vars:
+  // DATABASE_URL, AUTH_SECRET, CONFIG_ENCRYPTION_KEY, GOOGLE_CLIENT_ID,
+  // GOOGLE_CLIENT_SECRET, KIE_API_KEY, VIDU_API_KEY, VIDU_CALLBACK_SECRET,
+  // EVOLINK_API_KEY, ALIBABA_DASHSCOPE_API_KEY, R2_* and ZPAY_*.
+}
