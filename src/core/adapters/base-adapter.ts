@@ -1,6 +1,6 @@
 import type { effect as effectTable } from '@/config/db/schema';
 
-type EffectRecord = typeof effectTable.$inferSelect;
+export type GenerationEffectRecord = typeof effectTable.$inferSelect;
 
 export type GenerationResult = {
   status: 'succeeded' | 'failed' | 'processing' | 'pending';
@@ -9,9 +9,9 @@ export type GenerationResult = {
 };
 
 export abstract class BaseAdapter {
-  protected effect: EffectRecord;
+  protected effect: GenerationEffectRecord;
 
-  constructor(effect: EffectRecord) {
+  constructor(effect: GenerationEffectRecord) {
     this.effect = effect;
   }
 

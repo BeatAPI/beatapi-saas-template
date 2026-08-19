@@ -1,9 +1,12 @@
 import handler from '@tanstack/react-start/server-entry';
 
+import { registerProjectGenerationProviders } from './config/generation-providers';
 import { runDueGenerationStatusPasses } from './core/effects/server-poller';
 import { cleanupStaleGenerations } from './core/effects/stale-generations';
 import { getWwwRedirectLocation } from './lib/canonical-url';
 import { paraglideMiddleware } from './paraglide/server.js';
+
+registerProjectGenerationProviders();
 
 // On Cloudflare Workers, stash the binding env (Hyperdrive, ASSETS, …) on globalThis
 // so synchronous infrastructure factories can reach runtime bindings

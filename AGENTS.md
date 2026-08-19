@@ -81,6 +81,7 @@ src/
 │
 ├── config/
 │   ├── index.ts                 # All env vars (app, db, auth, stripe, resend, storage, ai, locale)
+│   ├── generation-providers.ts  # Fork-owned server adapter registration hook
 │   ├── db/schema.ts             # All table definitions (21 built-in + custom tables)
 │   └── locale/index.ts          # localeNames map for the language-switcher UI (locales live in project.inlang)
 │
@@ -416,6 +417,12 @@ All functionality is self-contained — no external packages needed.
 | `@/paraglide/runtime.js` | `getLocale`, `setLocale`, `localizeHref`, `localizeUrl`, `locales`, `baseLocale` |
 | `@/core/i18n/navigation` | `Link`, `useRouter`, `usePathname` (locale-aware) |
 | `@/core/i18n/dynamic` | `tDynamic` (runtime-built message keys) |
+
+`BeatApiAdapter` is the only built-in generation adapter. Forks may implement
+`BaseAdapter` and register a project-owned provider from
+`src/config/generation-providers.ts` with `registerGenerationProvider`. Do not
+add third-party generation SDKs, credentials, or settings to the upstream
+template unless BeatAPI explicitly adopts that provider as built-in.
 
 ## Database Schema
 

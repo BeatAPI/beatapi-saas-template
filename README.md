@@ -18,6 +18,8 @@ views.
 - Credits, subscriptions, API keys, invite codes, RBAC, CMS, and support.
 - Cloudflare R2 uploads and generated-output persistence.
 - BeatAPI image and video task adapters, polling, callbacks, and recovery.
+- A server-only adapter registry for project-owned generation providers;
+  BeatAPI remains the only built-in upstream.
 - English and Chinese localization through Paraglide JS.
 - Cloudflare Workers deployment with Hyperdrive and scheduled task recovery.
 

@@ -18,6 +18,30 @@ supplies `BEATAPI_API_KEY` on the server; models exposed by the template all use
 the BeatAPI task API. The repository does not ship direct adapters or credential
 fields for other generation upstreams.
 
+### Connect a project-owned provider
+
+The server adapter registry is an extension point for forks. Implement
+`BaseAdapter`, register a lowercase provider ID, and use the same ID in that
+project's effect rows:
+
+```ts
+import {
+  registerGenerationProvider,
+} from '@/core/adapters/adapter-factory';
+import { MyProviderAdapter } from '@/core/adapters/my-provider-adapter';
+
+registerGenerationProvider(
+  'my-provider',
+  (effect) => new MyProviderAdapter(effect)
+);
+```
+
+Put project registrations in `src/config/generation-providers.ts`, which the
+server loads at startup. Custom SDKs, credentials, settings fields, callback
+verification, pricing, and tests belong to the adopter's fork. A custom
+registration does not become an officially supported or built-in provider, and
+it cannot replace the protected `beatapi` registration.
+
 ## Email
 
 | Provider | Level | Required values |
