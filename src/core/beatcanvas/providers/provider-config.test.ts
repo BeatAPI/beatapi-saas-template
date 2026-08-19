@@ -18,7 +18,7 @@ test('BeatAPI is the default BeatCanvas generation provider', () => {
   });
 });
 
-test('custom provider config keeps the same image and video contract', () => {
+test('unknown provider values cannot select a second generation upstream', () => {
   assert.deepEqual(
     getBeatCanvasProviderServerConfig({
       providerId: 'custom',
@@ -26,9 +26,9 @@ test('custom provider config keeps the same image and video contract', () => {
       apiKey: 'secret',
     }),
     {
-      id: 'custom',
-      label: 'Custom API',
-      isDefault: false,
+      id: 'beatapi',
+      label: 'BeatAPI',
+      isDefault: true,
       supports: ['image', 'video'],
       baseUrl: 'https://example.com',
       apiKey: 'secret',

@@ -22,10 +22,6 @@ export const envConfigs: Record<string, string> = {
   app_logo: publicEnv('VITE_APP_LOGO') ?? '/logo.png',
   github_repo_url: publicEnv('VITE_GITHUB_REPO_URL') ?? '',
   workspace_mode: publicEnv('VITE_WORKSPACE_MODE') ?? 'canvas',
-  generation_provider:
-    publicEnv('VITE_GENERATION_PROVIDER') ?? 'beatapi',
-  generation_provider_label:
-    publicEnv('VITE_GENERATION_PROVIDER_LABEL') ?? 'BeatAPI',
 
   // Database
   database_url: procEnv.DATABASE_URL ?? '',
@@ -141,8 +137,7 @@ export const envConfigs: Record<string, string> = {
   r2_video_public_url: procEnv.R2_VIDEO_PUBLIC_URL ?? '',
   r2_force_path_style: procEnv.R2_FORCE_PATH_STYLE ?? 'true',
 
-  // AI
-  replicate_api_token: procEnv.REPLICATE_API_TOKEN ?? '',
+  // Generation — BeatAPI is the only built-in upstream.
   beatapi_api_base_url:
     procEnv.BEATAPI_API_BASE_URL ?? 'https://api.beatapi.io',
   beatapi_api_key: procEnv.BEATAPI_API_KEY ?? '',

@@ -6,7 +6,17 @@
 - **Optional:** maintained adapter, settings schema, webhook verification, and manual sandbox checklist.
 - **Add-on:** isolated regional integration that can be removed without affecting the default build.
 
-Compilation alone is not proof that a provider works. Public documentation should say **verified** only after the relevant sandbox or paid end-to-end record exists.
+The template release gate is credential-free: automated contracts, tests,
+builds, dependency audit, and security scan. Publishing the template does not
+require a live charge or a real generation request. Adopters verify their own
+sandbox and production accounts before enabling them for customers.
+
+## Generation
+
+BeatAPI is the only built-in image and video generation upstream. The adopter
+supplies `BEATAPI_API_KEY` on the server; models exposed by the template all use
+the BeatAPI task API. The repository does not ship direct adapters or credential
+fields for other generation upstreams.
 
 ## Email
 
@@ -52,6 +62,9 @@ Every payment adapter must:
 - Cloudflare R2 stores uploads and generated output.
 - Supabase Auth and Supabase Storage are intentionally not part of this starter.
 
-## Verification record
+## Deployment verification record
 
-Before release, record the environment, date, provider mode, checkout/task ID, webhook result, and final local order/task state. Keep secrets and customer data out of the record.
+When deploying a fork, record the environment, date, provider mode,
+checkout/task ID, webhook result, and final local order/task state. Keep secrets
+and customer data out of the record. This adopter-owned record is not required
+to publish the upstream template.

@@ -3,7 +3,6 @@ import type { ReactNode } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { LayoutPanelTop, Workflow } from 'lucide-react';
 
-import { WorkspaceApiConfigDialog } from '@/components/app/workspace-api-config-dialog';
 import { ProjectAssetsDialog } from '@/components/app/project-assets-dialog';
 import { Link } from '@/core/i18n/navigation';
 import { useTranslations } from '@/core/workspace-lib/shims/next-intl';
@@ -156,9 +155,6 @@ export function ProductPageShell({
                 </div>
               ) : null}
               {projectId ? <ProjectAssetsDialog projectId={projectId} /> : null}
-              <WorkspaceApiConfigDialog
-                providerId={envConfigs.generation_provider}
-              />
             </div>
           </div>
         </header>

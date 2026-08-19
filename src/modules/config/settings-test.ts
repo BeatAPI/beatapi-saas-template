@@ -21,10 +21,6 @@ import { PaymentType } from '@/core/payment/types';
 import { ResendProvider } from '@/core/email/resend';
 import { MailgunProvider } from '@/core/email/mailgun';
 import { R2Provider } from '@/core/storage/r2';
-import { ReplicateProvider } from '@/core/ai/replicate';
-import { GeminiProvider } from '@/core/ai/gemini';
-import { FalProvider } from '@/core/ai/fal';
-import { AIMediaType } from '@/core/ai/types';
 import { getUniSeq } from '@/lib/hash';
 import { envConfigs } from '@/config';
 import type { TestResult } from './settings-test-specs';
@@ -57,12 +53,6 @@ export async function runTest(
         return await testWechat(inputs, configs);
       case 'r2':
         return await testR2(inputs, configs);
-      case 'replicate':
-        return await testReplicate(inputs, configs);
-      case 'gemini':
-        return await testGemini(inputs, configs);
-      case 'fal':
-        return await testFal(inputs, configs);
       default:
         return { success: false, message: `No test available for "${group}"` };
     }
@@ -360,63 +350,4 @@ async function testR2(inputs: Record<string, string>, configs: Record<string, st
   if (result.url) details['URL'] = result.url;
   if (result.location) details['Location'] = result.location;
   return { success: true, message: 'Uploaded test object', details };
-}
-
-// --- AI -------------------------------------------------------------------
-
-async function testReplicate(inputs: Record<string, string>, configs: Record<string, string>): Promise<TestResult> {
-  const missing = need(configs, ['replicate_api_token']);
-  if (missing) return { success: false, message: missing };
-
-  const provider = new ReplicateProvider({ apiToken: configs.replicate_api_token });
-  const result = await provider.generate({
-    params: {
-      mediaType: AIMediaType.IMAGE,
-      model: inputs.model,
-      prompt: inputs.prompt,
-    },
-  });
-  return {
-    success: true,
-    message: 'Replicate accepted the request',
-    details: { 'Task ID': result.taskId, Status: result.taskStatus },
-  };
-}
-
-async function testGemini(inputs: Record<string, string>, configs: Record<string, string>): Promise<TestResult> {
-  const missing = need(configs, ['gemini_api_key']);
-  if (missing) return { success: false, message: missing };
-
-  const provider = new GeminiProvider({ apiKey: configs.gemini_api_key });
-  const result = await provider.generate({
-    params: {
-      mediaType: AIMediaType.IMAGE,
-      model: inputs.model,
-      prompt: inputs.prompt,
-    },
-  });
-  return {
-    success: true,
-    message: 'Gemini accepted the request',
-    details: { 'Task ID': result.taskId, Status: result.taskStatus },
-  };
-}
-
-async function testFal(inputs: Record<string, string>, configs: Record<string, string>): Promise<TestResult> {
-  const missing = need(configs, ['fal_api_key']);
-  if (missing) return { success: false, message: missing };
-
-  const provider = new FalProvider({ apiKey: configs.fal_api_key });
-  const result = await provider.generate({
-    params: {
-      mediaType: AIMediaType.IMAGE,
-      model: inputs.model,
-      prompt: inputs.prompt,
-    },
-  });
-  return {
-    success: true,
-    message: 'Fal accepted the request',
-    details: { 'Task ID': result.taskId, Status: result.taskStatus },
-  };
 }

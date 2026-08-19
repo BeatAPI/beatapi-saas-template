@@ -90,9 +90,11 @@ pnpm audit --prod --audit-level high
 ```
 
 Also verify the main landing, authentication, pricing, project creation,
-Studio, Canvas, account, and admin paths at desktop and mobile widths. Paid
-checkout and provider-backed generation need explicit credentials and a
-separate end-to-end test.
+Studio, Canvas, account, and admin paths at desktop and mobile widths. Do not
+make a real payment or a billable generation request as part of the template
+release gate. The adopter verifies Stripe in their own sandbox and BeatAPI with
+their own server-side key before enabling those features for customers.
 
 Before any commit, run the repository `security-scan` skill. Report what was
-implemented, what was verified, and what still requires production credentials.
+implemented, what was verified, and which adopter-owned integrations still
+require configuration.

@@ -26,8 +26,7 @@ export abstract class BaseAdapter {
 
   async get4kVideo?(
     taskId: string,
-    index?: number,
-    callBackUrl?: string
+    index?: number
   ): Promise<GenerationResult>;
 
   estimateCost?(input: unknown): number;

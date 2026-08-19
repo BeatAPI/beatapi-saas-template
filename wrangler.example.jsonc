@@ -31,15 +31,9 @@
     "VITE_GOOGLE_ONE_TAP_ENABLED": "false",
     "VITE_CRISP_ENABLED": "false",
     "VITE_TURNSTILE_ENABLED": "false",
-    "EVOLINK_API_BASE_URL": "https://api.evolink.ai/v1",
-    "ALIBABA_DASHSCOPE_API_BASE_URL": "https://dashscope-intl.aliyuncs.com/api/v1",
-    "ALIBABA_WAN_T2V_MODEL": "wan2.7-t2v",
-    "ALIBABA_WAN_I2V_MODEL": "wan2.7-i2v",
-    "ALIBABA_WAN_VIDEOEDIT_MODEL": "wan2.7-videoedit",
+    "BEATAPI_API_BASE_URL": "https://api.beatapi.io",
     "EFFECTS_GENERATION_TIMEOUT_MS": "1800000",
-    "EFFECTS_POLL_INTERVAL_MS": "20000",
-    "KIE_CALLBACK_URL": "https://your-domain.com/api/effects/callback",
-    "VIDU_CALLBACK_URL": "https://your-domain.com/api/effects/callback"
+    "EFFECTS_POLL_INTERVAL_MS": "20000"
   },
   // Production Postgres options:
   //
@@ -53,6 +47,5 @@
   // Direct connection fallback: set DATABASE_URL as a Worker secret.
   // Secrets must be set with `wrangler secret put`, not vars:
   // DATABASE_URL, AUTH_SECRET, CONFIG_ENCRYPTION_KEY, GOOGLE_CLIENT_ID,
-  // GOOGLE_CLIENT_SECRET, KIE_API_KEY, VIDU_API_KEY, VIDU_CALLBACK_SECRET,
-  // EVOLINK_API_KEY, ALIBABA_DASHSCOPE_API_KEY, R2_* and ZPAY_*.
+  // GOOGLE_CLIENT_SECRET, BEATAPI_API_KEY, R2_* and ZPAY_*.
 }

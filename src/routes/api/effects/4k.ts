@@ -1,7 +1,6 @@
 import { refundCredits } from '@/core/workspace-credits/credits';
 import { createAdapter } from '@/core/adapters/adapter-factory';
 import { getEffectById } from '@/core/effects/effects';
-import { resolveKieCallbackUrl } from '@/core/effects/kie-callback';
 import {
   getGenerationById,
   updateGenerationById,
@@ -80,11 +79,7 @@ async function POST({ request }: { request: Request }) {
     );
   }
 
-  const result = await adapter.get4kVideo(
-    providerTaskId,
-    index,
-    resolveKieCallbackUrl()
-  );
+  const result = await adapter.get4kVideo(providerTaskId, index);
 
   const nextProviderTaskId =
     result.output && typeof result.output === 'object'

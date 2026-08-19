@@ -85,27 +85,6 @@ export const testSpecs: Record<string, TestSpec> = {
       { name: 'filename', label: 'Test filename', type: 'text', defaultValue: 'beatapi-settings-test.txt' },
     ],
   },
-  replicate: {
-    group: 'replicate',
-    fields: [
-      { name: 'model', label: 'Model', type: 'text', defaultValue: 'black-forest-labs/flux-schnell', required: true },
-      { name: 'prompt', label: 'Prompt', type: 'textarea', defaultValue: 'a small red cube, product photography', required: true },
-    ],
-  },
-  gemini: {
-    group: 'gemini',
-    fields: [
-      { name: 'model', label: 'Model', type: 'text', defaultValue: 'gemini-2.5-flash-image', required: true },
-      { name: 'prompt', label: 'Prompt', type: 'textarea', defaultValue: 'a small red cube, product photography', required: true },
-    ],
-  },
-  fal: {
-    group: 'fal',
-    fields: [
-      { name: 'model', label: 'Model', type: 'text', defaultValue: 'fal-ai/flux/schnell', required: true },
-      { name: 'prompt', label: 'Prompt', type: 'textarea', defaultValue: 'a small red cube, product photography', required: true },
-    ],
-  },
 };
 
 export function getTestSpec(group: string): TestSpec | undefined {

@@ -11,7 +11,6 @@ import {
   resolveGenerationSubmitTransition,
   resolveProviderTaskId,
 } from '@/core/effects/generation-orchestrator';
-import { resolveKieCallbackUrl } from '@/core/effects/kie-callback';
 import {
   OUTPUT_STORAGE_SYNC_RETRY_ERROR,
   persistEffectOutputIfNeeded,
@@ -147,7 +146,6 @@ export async function submitEffectGeneration({
     ...sanitizedInput
   } = inputObject;
   const adapter = createAdapter(effect);
-  const callbackUrl = resolveKieCallbackUrl();
   const promptValidation = validateGenerationPrompt(
     typeof sanitizedInput.prompt === 'string' ? sanitizedInput.prompt : '',
     {
@@ -170,13 +168,10 @@ export async function submitEffectGeneration({
     };
   }
 
-  const adapterInput: Record<string, unknown> = callbackUrl
-    ? {
-        ...sanitizedInput,
-        prompt: promptValidation.trimmedPrompt,
-        callBackUrl: callbackUrl,
-      }
-    : { ...sanitizedInput, prompt: promptValidation.trimmedPrompt };
+  const adapterInput: Record<string, unknown> = {
+    ...sanitizedInput,
+    prompt: promptValidation.trimmedPrompt,
+  };
   const recordedInput = metadata
     ? {
         ...adapterInput,

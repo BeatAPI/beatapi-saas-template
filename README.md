@@ -111,16 +111,28 @@ Marketing / Auth / Settings / Admin / Billing
 See [ARCHITECTURE.md](ARCHITECTURE.md), [PROVIDERS.md](PROVIDERS.md), and
 [WORKSPACE_MODES.md](WORKSPACE_MODES.md) for the detailed contracts.
 
-## Production release checklist
+## Template release checklist
 
-Before deploying a fork:
+Publishing this repository does not require BeatAPI, Stripe, OAuth, email, or
+storage credentials, and it does not require a real payment. Template
+maintainers verify the reusable code paths with automated tests:
+
+1. Run `pnpm verify`, `pnpm cf:build`, and the production dependency audit.
+2. Run the repository security scan and confirm `.env*` files are ignored.
+3. Confirm the committed examples contain placeholders only.
+
+## Deploying your fork
+
+Each adopter owns their accounts, secrets, catalog IDs, callback URLs, and
+production verification. Before deploying a fork:
 
 1. Generate and review database migrations.
 2. Configure production secrets with the hosting provider.
-3. Run `pnpm verify`, `pnpm cf:build`, and the production dependency audit.
-4. Test sign-in, verification email, Stripe checkout and webhook handling, R2,
-   one real BeatAPI task, credit deduction, failure refund, and task recovery.
-5. Verify callback URLs and trusted origins on the final domain.
+3. Test sign-in and verification email with your own auth and email settings.
+4. Test Stripe in your own sandbox before enabling live checkout.
+5. Test BeatAPI generation with your own server-side `BEATAPI_API_KEY`.
+6. Verify storage, webhook URLs, trusted origins, credits, refunds, and task
+   recovery on your final domain.
 
 ## License
 

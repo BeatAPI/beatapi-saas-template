@@ -10,7 +10,6 @@ import {
   withFallbackFromBase,
 } from '@/core/effects/generation-orchestrator';
 import { createAdapter } from '@/core/adapters/adapter-factory';
-import { resolveKieCallbackUrl } from '@/core/effects/kie-callback';
 import {
   didOutputStorageSyncFail,
   OUTPUT_STORAGE_SYNC_RETRY_ERROR,
@@ -284,11 +283,7 @@ export const runGenerationStatusPass = async ({
         return { shouldRetry: false, retryAfterMs: 0 };
       }
 
-      const fourKResult = await adapter.get4kVideo(
-        providerTaskId,
-        0,
-        resolveKieCallbackUrl()
-      );
+      const fourKResult = await adapter.get4kVideo(providerTaskId, 0);
       if (fourKResult.status === 'failed') {
         await updateGenerationById({
           id: wmTaskId,

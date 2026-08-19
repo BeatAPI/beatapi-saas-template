@@ -17,8 +17,6 @@ const textExtensions = new Set([
 
 const replacements = [
   ['NEXT' + '_PUBLIC_', 'VITE_'],
-  ['ship' + 'any-tanstack-dev', 'beatapi-tanstack-dev'],
-  ['Ship' + 'Any', 'BeatAPI'],
 ];
 
 async function exists(filePath) {

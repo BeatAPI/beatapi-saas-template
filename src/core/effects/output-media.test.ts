@@ -3,9 +3,9 @@ import test from 'node:test';
 
 import { resolveOutputMedia } from './output-media';
 
-test('extracts Vidu creation video and cover URLs from callback payloads', () => {
+test('extracts creation video and cover URLs from nested provider output', () => {
   const media = resolveOutputMedia({
-    id: 'vidu-task-1',
+    id: 'task-1',
     state: 'success',
     creations: [
       {

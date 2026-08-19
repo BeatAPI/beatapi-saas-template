@@ -70,10 +70,8 @@ export function getSettingGroups(): SettingGroup[] {
     // Storage
     { name: 'r2', title: 'Cloudflare R2', description: 'Uploads and generated output storage', tab: 'storage' },
 
-    // AI
-    { name: 'replicate', title: 'Replicate', description: 'Replicate AI API', tab: 'ai' },
-    { name: 'gemini', title: 'Gemini', description: 'Google Gemini API', tab: 'ai' },
-    { name: 'fal', title: 'Fal', description: 'Fal AI API', tab: 'ai' },
+    // AI generation
+    { name: 'beatapi', title: 'BeatAPI', description: 'Built-in image and video generation upstream', tab: 'ai' },
 
     // Analytics
     { name: 'google_analytics', title: 'Google Analytics', description: 'Inject gtag.js with the configured Measurement ID', tab: 'analytics' },
@@ -235,14 +233,9 @@ export function getSettings(): Setting[] {
     { name: 'r2_endpoint', title: 'Endpoint', type: 'text', placeholder: 'https://<account-id>.r2.cloudflarestorage.com', tip: 'Leave empty to use the default R2 endpoint', group: 'r2', tab: 'storage' },
     { name: 'r2_domain', title: 'Domain', type: 'text', placeholder: 'https://cdn.example.com', group: 'r2', tab: 'storage' },
 
-    // ─── AI / Replicate ──────────────────────────────────────────────
-    { name: 'replicate_api_token', title: 'API Token', type: 'password', placeholder: 'r8_xxx', group: 'replicate', tab: 'ai' },
-
-    // ─── AI / Gemini ─────────────────────────────────────────────────
-    { name: 'gemini_api_key', title: 'API Key', type: 'password', placeholder: 'xxx', group: 'gemini', tab: 'ai' },
-
-    // ─── AI / Fal ────────────────────────────────────────────────────
-    { name: 'fal_api_key', title: 'API Key', type: 'password', placeholder: 'xxx', group: 'fal', tab: 'ai' },
+    // ─── AI / BeatAPI ────────────────────────────────────────────────
+    { name: 'BEATAPI_API_BASE_URL', title: 'API Base URL', type: 'text', placeholder: 'https://api.beatapi.io', group: 'beatapi', tab: 'ai', defaultValue: 'https://api.beatapi.io' },
+    { name: 'BEATAPI_API_KEY', title: 'API Key', type: 'password', placeholder: 'Your server-side BeatAPI key', group: 'beatapi', tab: 'ai', tip: 'Used only on the server for image and video generation.' },
 
     // ─── Analytics / Google Analytics ────────────────────────────────
     { name: 'google_analytics_id', title: 'Measurement ID', type: 'text', placeholder: 'G-XXXXXXXXXX', group: 'google_analytics', tab: 'analytics' },

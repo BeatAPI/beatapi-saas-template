@@ -3,22 +3,27 @@ import test from 'node:test';
 
 import { estimateCreditsForEffect } from './pricing';
 
-test('estimates ecommerce video credits by duration at 20 credits per second', () => {
-  const estimate = (wmDuration: string) =>
-    estimateCreditsForEffect({
-      effect: {
-        id: 15,
-        credit: 5,
-        provider: null,
-        pricingSchema: null,
+test('uses the explicit model pricing schema without provider-specific fallbacks', () => {
+  const estimate = estimateCreditsForEffect({
+    effect: {
+      id: 9,
+      credit: 30,
+      provider: 'beatapi',
+      pricingSchema: {
+        version: 1,
+        strategy: 'matrix',
+        fallbackCredits: 30,
+        rules: [
+          {
+            when: { wmDuration: '5s', wmOutputQuality: '720p' },
+            credits: 61,
+          },
+        ],
       },
-      input: {
-        wmDuration,
-      },
-    });
+    },
+    input: { wmDuration: '5s', wmOutputQuality: '720p' },
+  });
 
-  assert.equal(estimate('10s').handled, true);
-  assert.equal(estimate('10s').credits, 200);
-  assert.equal(estimate('15s').credits, 300);
-  assert.equal(estimate('60s').credits, 1200);
+  assert.equal(estimate.handled, true);
+  assert.equal(estimate.credits, 61);
 });

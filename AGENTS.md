@@ -68,7 +68,7 @@ src/
 │   ├── payment/                 # Stripe + optional Creem/Lemon/Paddle/PayPal adapters
 │   ├── email/                   # Resend + optional Mailgun adapter
 │   ├── storage/                 # Cloudflare R2
-│   └── ai/                     # AI providers (Replicate, Gemini, Fal, Kie)
+│   └── adapters/                # BeatAPI image/video generation adapter
 │
 ├── modules/                     # Business logic — independently removable
 │   ├── payment/service.ts       # Checkout, webhook, order + subscription + credit atomicity
@@ -401,7 +401,7 @@ All functionality is self-contained — no external packages needed.
 | `@/core/payment` | `PaymentManager`, Stripe, Creem, Lemon Squeezy, Paddle, and PayPal adapters |
 | `@/core/email` | `EmailManager`, `ResendProvider`, `MailgunProvider` |
 | `@/core/storage` | `StorageManager`, `R2Provider` |
-| `@/core/ai` | `AIManager`, `ReplicateProvider`, `GeminiProvider`, `FalProvider`, `KieProvider` |
+| `@/core/adapters` | `BeatApiAdapter` and the server-only BeatAPI task contract |
 | `@/core/auth/rbac` | `matchPermission`, `matchAnyPermission`, `ROLES` |
 | `@/core/db` | `db()` singleton, `createDb` (multi-dialect) |
 | `@/lib/hash` | `getUuid`, `getSnowId`, `getUniSeq`, `getNonceStr`, `md5` |

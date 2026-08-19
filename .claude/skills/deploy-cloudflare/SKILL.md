@@ -135,10 +135,11 @@ Verify at minimum:
 - static assets load from the deployed origin;
 - Worker logs show no database or binding errors.
 
-When production credentials and a disposable account are available, verify
-sign-in, dashboard loading, and a read-only database-backed request. Payment
-webhooks and paid checkout require a separate explicitly authorized end-to-end
-test.
+The deployer supplies and verifies their own auth, email, storage, Stripe, and
+BeatAPI credentials on the final domain. Start with provider sandbox modes.
+Never make a real payment or billable generation request merely to publish or
+deploy the template; any live end-to-end test is an adopter-owned, explicitly
+authorized operation.
 
 ## Handoff
 

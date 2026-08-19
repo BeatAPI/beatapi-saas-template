@@ -25,7 +25,7 @@ test('pricing triggers use the global modal instead of local modal state', () =>
 test('canvas header no longer exposes upgrade pricing inside the workspace', () => {
   const productShellSource = read('../app/product-page-shell.tsx');
 
-  assert.match(productShellSource, /WorkspaceApiConfigDialog/);
+  assert.doesNotMatch(productShellSource, /WorkspaceApiConfigDialog/);
   assert.doesNotMatch(productShellSource, /usePricingModal/);
   assert.doesNotMatch(productShellSource, /credits\.upgrade/);
 });

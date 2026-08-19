@@ -13,16 +13,10 @@ the provider contract that lets the canvas generate images and videos.
   directory. UI lives under `src/components/beatcanvas`.
 - `providers/provider-config.ts` defines the public provider identity and the
   server-only endpoint and credential contract.
-- BeatAPI is the default provider and uses `https://api.beatapi.io`.
+- BeatAPI is the only built-in generation provider and uses
+  `https://api.beatapi.io`.
 - API keys remain on the server. Client components may display the provider
   name, but must never receive or persist credentials in a project snapshot.
-
-## Provider roadmap
-
-The first release ships with `beatapi`. A later settings screen can enable the
-existing `custom` provider ID by collecting a base URL and encrypted API key on
-the server. A custom provider must preserve the same create-image,
-create-video, and task-status semantics before it can be selected by a canvas.
 
 ## Open-source packaging
 

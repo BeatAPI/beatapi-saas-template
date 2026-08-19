@@ -46,7 +46,7 @@ actually exploitable (trace the input path) before reporting.
 
 ## 3. Prompt injection
 
-For any code that builds LLM prompts (`src/core/ai/`, AI task handlers):
+For any code that builds generation prompts (BeatAPI adapters, AI task handlers):
 
 - Untrusted content (user input, db content, fetched web pages, file uploads)
   concatenated into system prompts or tool instructions without delimiting/labeling.

@@ -1,4 +1,4 @@
-export const BEATCANVAS_PROVIDER_IDS = ['beatapi', 'custom'] as const;
+export const BEATCANVAS_PROVIDER_IDS = ['beatapi'] as const;
 
 export type BeatCanvasProviderId =
   (typeof BEATCANVAS_PROVIDER_IDS)[number];
@@ -19,8 +19,8 @@ export type BeatCanvasProviderServerConfig =
 export const DEFAULT_BEATAPI_BASE_URL = 'https://api.beatapi.io';
 
 export const resolveBeatCanvasProviderId = (
-  value: string | null | undefined
-): BeatCanvasProviderId => (value === 'custom' ? 'custom' : 'beatapi');
+  _value: string | null | undefined
+): BeatCanvasProviderId => 'beatapi';
 
 export const getBeatCanvasProviderPublicConfig = (
   providerId: string | null | undefined
@@ -29,8 +29,8 @@ export const getBeatCanvasProviderPublicConfig = (
 
   return {
     id,
-    label: id === 'beatapi' ? 'BeatAPI' : 'Custom API',
-    isDefault: id === 'beatapi',
+    label: 'BeatAPI',
+    isDefault: true,
     supports: ['image', 'video'],
   };
 };
